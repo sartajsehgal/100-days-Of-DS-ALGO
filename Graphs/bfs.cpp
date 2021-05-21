@@ -2,6 +2,7 @@
 #include <map>
 #include <list>
 #include <queue>
+#include <climits>
 using namespace std;
 
 class Graph {
@@ -35,6 +36,40 @@ public:
 				}
 			}
 		}
+		cout<<endl;
+	}
+
+	void single_source_shortest_path(int src)
+	{
+		map<int,int> distance;
+		queue<int> q;
+
+		for(auto node:l)
+		{
+			distance[node.first]=INT_MAX;
+		}
+
+		q.push(src);
+		distance[src]=0;
+
+		while(!q.empty())
+		{
+			int n=q.front();
+			q.pop();
+			for(auto nbr:l[n])
+			{
+				if(distance[nbr]==INT_MAX)
+				{
+					q.push(nbr);
+					distance[nbr]=distance[n]+1;
+				}
+			}
+		}
+
+		for(auto val:distance)
+		{
+			cout<<"The distance of node "<<val.first<<" is "<<val.second<<endl;
+		}
 	}
 };
 
@@ -48,4 +83,5 @@ int main()
 	g.addEdge(3,4);
 	g.addEdge(4,5);
 	g.bfs(0);
+	g.single_source_shortest_path(0);
 }
