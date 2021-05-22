@@ -6,8 +6,6 @@ void merge(vector<vector<int>> &arr,int sm,int m,int sn,int n)
 	int nm=(sm+m)/2;
 	int nn=(sn+n)/2;
 	
-	cout<<"sm:"<<sm<<" nm:"<<nm<<" m:"<<m<<" sn:"<<sn<<" nn:"<<nn<<" n:"<<n<<endl;
-
 	vector<vector<int>> p1(nm-sm+1,vector<int>(nn-sn+1,0));
 	vector<vector<int>> p2(nm-sm+1,vector<int>(n-nn,0));
 	vector<vector<int>> p3(m-nm,vector<int>(nn-sn+1,0));
@@ -119,27 +117,56 @@ void merge(vector<vector<int>> &arr,int sm,int m,int sn,int n)
     	j3=0;j4=0;mj=sn;i3++;i4++;
     }
 
+    vector<vector<int>> matrix(arr);
 
-
-
-    //Printing the resultant matrix
-
-    for(int i=sm;i<=m;i++)
+    int x=sm,y=sn;
+    int x1=sm,x2=nm+1;
+    for(int j=sn;j<=n;j++)
     {
-    	for(int j=sn;j<=n;j++)
+    	while(x1<=nm && x2<=m)
     	{
-    		cout<<arr[i][j]<<" ";
+    		if(matrix[x1][j]<=matrix[x2][j])
+    		{
+    			arr[x][y]=matrix[x1][j];
+    			x1++;x++;
+    		}
+    		else
+    		{
+    			arr[x][y]=matrix[x2][j];
+    			x2++;x++;
+    		}
     	}
-    	cout<<endl;
+    	while(x1<=nm)
+    	{
+    		arr[x][y]=matrix[x1][j];
+    		x1++;x++;
+    	}
+    	while(x2<=m)
+    	{
+    		arr[x][y]=matrix[x2][j];
+    		x2++;x++;
+    	}
+    	x1=sm;x2=nm+1;
+    	y++;
+    	x=sm;
     }
-    cout<<endl;
+
+    // for(int i=sm;i<=m;i++)
+    // {
+    // 	for(int j=sn;j<=n;j++)
+    // 	{
+    // 		cout<<arr[i][j]<<" ";
+    // 	}
+    // 	cout<<endl;
+    // }
+    // cout<<endl;
+
 }
 
 void merge_sort(vector<vector<int>> &arr,int sm,int m,int sn,int n)
 {
 	if(sm<m || sn<n)
 	{
-	    //cout<<"hello"<<endl;
 		int nm=(sm+m)/2;
 		int nn=(sn+n)/2;
 
@@ -164,23 +191,13 @@ int main()
 			cin>>arr[i][j];
 		}
 	}
-	// for(int i=0;i<m;i++)
-	// {
-	// 	for(int j=0;j<n;j++)
-	// 	{
-	// 		cout<<arr[i][j]<<" ";
-	// 	}
-	// 	cout<<endl;
-	// }
 	merge_sort(arr,0,m-1,0,n-1);
-	// for(int i=0;i<m;i++)
-	// {
-	// 	for(int j=0;j<n;j++)
-	// 	{
-	// 		cout<<arr[i][j]<<" ";
-	// 	}
-	// 	cout<<endl;
-	// }
+	for(int i=0;i<m;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			cout<<arr[i][j]<<" ";
+		}
+		cout<<endl;
+	}
 }
-
-
