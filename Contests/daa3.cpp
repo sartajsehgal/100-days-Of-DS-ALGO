@@ -18,16 +18,11 @@ public:
 		q.push(src);
 		visited[src] = true;
 
-		while(!q.empty())
+		while(!q.empty() && q.front()!=val)
 		{
 			int n= q.front();
 			q.pop();
-			if(q.front()==val)
-			{
-				break;
-			}
-			else
-			{
+			
 				for(auto nbr:mp[n])
 				{
 					if(!visited[nbr])
@@ -35,10 +30,9 @@ public:
 						parent[nbr]=n;
 						visited[nbr]=true;
 						q.push(nbr);
-						//cout<<"nbr:"<<nbr<<" parent:"<<parent[nbr]<<endl;
 					}
 				}
-			}
+			
 		}
 		vector<int> ans;
 		ans.push_back(val);
