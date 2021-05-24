@@ -5,6 +5,8 @@ void merge(vector<vector<int>> &arr,int sm,int m,int sn,int n)
 {
 	int nm=(sm+m)/2;
 	int nn=(sn+n)/2;
+
+	//cout<<"sm:"<<sm<<" nm:"<<nm<<" m:"<<m<<" sn:"<<sn<<" nn:"<<nn<<" n:"<<n<<endl;
 	
 	vector<vector<int>> p1(nm-sm+1,vector<int>(nn-sn+1,0));
 	vector<vector<int>> p2(nm-sm+1,vector<int>(n-nn,0));
@@ -77,7 +79,7 @@ void merge(vector<vector<int>> &arr,int sm,int m,int sn,int n)
     		mj++;
     	}
     	mi++;
-    	j1=0;j2=0;mj=0;i1++;i2++;
+    	j1=0;j2=0;mj=sn;i1++;i2++;
     }
 
     int i3=0,j3=0;
@@ -118,6 +120,16 @@ void merge(vector<vector<int>> &arr,int sm,int m,int sn,int n)
     }
 
     vector<vector<int>> matrix(arr);
+
+    // for(int i=sm;i<=m;i++)
+    // {
+    // 	for(int j=sn;j<=n;j++)
+    // 	{
+    // 		cout<<matrix[i][j]<<" ";
+    // 	}
+    // 	cout<<endl;
+    // }
+    // cout<<endl;
 
     int x=sm,y=sn;
     int x1=sm,x2=nm+1;
@@ -160,7 +172,6 @@ void merge(vector<vector<int>> &arr,int sm,int m,int sn,int n)
     // 	cout<<endl;
     // }
     // cout<<endl;
-
 }
 
 void merge_sort(vector<vector<int>> &arr,int sm,int m,int sn,int n)
@@ -170,6 +181,8 @@ void merge_sort(vector<vector<int>> &arr,int sm,int m,int sn,int n)
 		int nm=(sm+m)/2;
 		int nn=(sn+n)/2;
 
+		//cout<<"In MS nm:"<<nm<<" nn:"<<nn<<endl;
+
 		merge_sort(arr,sm,nm,sn,nn);
 		merge_sort(arr,sm,nm,nn+1,n);
 		merge_sort(arr,nm+1,m,sn,nn);
@@ -177,6 +190,7 @@ void merge_sort(vector<vector<int>> &arr,int sm,int m,int sn,int n)
 
 		merge(arr,sm,m,sn,n);
 	}
+	return;
 }
 
 int main()
@@ -201,3 +215,4 @@ int main()
 		cout<<endl;
 	}
 }
+
